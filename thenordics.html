@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The nordics</title>
+    <link rel="stylesheet" href="./css/thenordics.css" />
+    <!-- <link rel="stylesheet" href="./css/globalcss.css" /> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 1. Background Video Layer -->
+    <video id="bg-video" autoplay muted loop playsinline poster="">
+      <source src="./css/vecteezy.mp4" type="video/mp4" />
+    </video>
+
+    <main class="main">
+      <div class="text-h1"><h1>Welcome to the nordics</h1></div>
+
+      <div class="midconcard">
+        <!-- Added 'data-video' to each card to tell the JS which file to play -->
+        <div
+          class="inmidcon icecon iframe-hover-iceland"
+          data-video="./css/vecteezy_falling-snow-overlay-loop.mp4"
+        >
+          <a href="./iceland.html">
+            <img class="midconiceimg" src="./css/iceland1.jpeg" alt="" />
+            <p class="text">Iceland</p>
+          </a>
+        </div>
+
+        <div
+          class="inmidcon fincon iframe-hover-finland"
+          data-video="./css/vecteezy_the-northern-lights-vibrant-aurora-streamers-in-the-night-sky_65817013.mp4"
+        >
+          <a href="./finland.html">
+            <img class="midconfinimg" src="./css/finland1.jpg" alt="" />
+            <p class="text">Finland</p>
+          </a>
+        </div>
+
+        <div
+          class="inmidcon swecon iframe-hover-sweden"
+          data-video="./css/vecteezy_closeup-of-turkey-meatballs-on-a-plate_48659911.mp4"
+        >
+          <a href="./sweden.html">
+            <img src="./css/sweden1.avif" alt="" class="midconsweimg" />
+            <p class="text">Sweden</p>
+          </a>
+        </div>
+
+        <div
+          class="inmidcon norcon iframe-hover-norway"
+          data-video="./css/norway.mp4"
+        >
+          <a href="./norway.html">
+            <img src="./css/norway1.avif" alt="" class="midconnorimg" />
+            <p class="text">Norway</p>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- 2. The JavaScript (either in thenordics.js or right here) -->
+    <script>
+      const video = document.getElementById("bg-video");
+      const cards = document.querySelectorAll(".inmidcon");
+
+      // Save the default video source (vecteezy.mp4) when the page loads
+      const defaultVideo = "./css/vecteezy.mp4";
+
+      cards.forEach((card) => {
+        // When entering a card, play the specific country video
+        card.addEventListener("mouseenter", () => {
+          const videoSrc = card.getAttribute("data-video");
+          if (videoSrc && video.getAttribute("src") !== videoSrc) {
+            video.src = videoSrc;
+            video.play();
+          }
+        });
+
+        // When leaving a card, reset to the default video
+        card.addEventListener("mouseleave", () => {
+          if (video.getAttribute("src") !== defaultVideo) {
+            video.src = defaultVideo;
+            video.play();
+          }
+        });
+      });
+    </script>
+
+    <script src="./css/thenordics.js"></script>
+    <div id="transition-overlay" class="page-overlay"></div>
+  </body>
+</html>
