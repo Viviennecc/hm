@@ -79,25 +79,25 @@ body {
 .icecon {
   height: 400px;
   /* position: absolute; */
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .fincon {
   height: 400px;
   /* position: absolute; */
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .swecon {
   height: 450px;
   /* position: absolute; */
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .norcon {
   height: 450px;
   /* position: absolute; */
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 .norcon img {
   border-color: lightblue;
@@ -110,8 +110,8 @@ body {
 .text-h1 h1,
 .inmidcon p {
   transition:
-    color 0.3s ease-in-out,
-    font-size 0.3s ease-in-out;
+    color 0.5s ease-in-out,
+    font-size 0.5s ease-in-out;
 }
 
 #bg-video {
