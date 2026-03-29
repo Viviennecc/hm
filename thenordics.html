@@ -67,26 +67,57 @@
     <!-- 2. The JavaScript (either in thenordics.js or right here) -->
     <script>
       const video = document.getElementById("bg-video");
+      const mainTitle = document.querySelector(".text-h1 h1");
       const cards = document.querySelectorAll(".inmidcon");
 
-      // Save the default video source (vecteezy.mp4) when the page loads
+      // Defaults
       const defaultVideo = "./css/vecteezy.mp4";
+      const defaultText = "Welcome to the nordics";
 
       cards.forEach((card) => {
-        // When entering a card, play the specific country video
+        // Determine the country code once per card
+        let code = card.classList.contains("icecon")
+          ? "iceland"
+          : card.classList.contains("fincon")
+            ? "finland"
+            : card.classList.contains("swecon")
+              ? "sweden"
+              : "norway";
+
+        // 1. Mouse Enter: Change Video, Text, and Parent Class
         card.addEventListener("mouseenter", () => {
+          // Change Video
           const videoSrc = card.getAttribute("data-video");
           if (videoSrc && video.getAttribute("src") !== videoSrc) {
             video.src = videoSrc;
             video.play();
           }
+
+          // Change Header Text
+          mainTitle.textContent = `Explore ${code.charAt(0).toUpperCase() + code.slice(1)}`;
+
+          // Add Parent Class (for iframes)
+          if (window.parent && window.parent.document.body) {
+            window.parent.document.body.classList.add(`iframe-hover-${code}`);
+          }
         });
 
-        // When leaving a card, reset to the default video
+        // 2. Mouse Leave: Reset everything to default
         card.addEventListener("mouseleave", () => {
+          // Reset Video
           if (video.getAttribute("src") !== defaultVideo) {
             video.src = defaultVideo;
             video.play();
+          }
+
+          // Reset Header Text
+          mainTitle.textContent = defaultText;
+
+          // Remove Parent Class
+          if (window.parent && window.parent.document.body) {
+            window.parent.document.body.classList.remove(
+              `iframe-hover-${code}`,
+            );
           }
         });
       });
