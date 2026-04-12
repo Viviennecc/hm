@@ -8,10 +8,12 @@ const countryConfig = {
     name: "Iceland",
     tz: "Atlantic/Reykjavik",
     city: "Reykjavik",
+    lat: 64.1355,
+    lon: -21.8954
   },
-  "finland.html": { name: "Finland", tz: "Europe/Helsinki", city: "Helsinki" },
-  "sweden.html": { name: "Sweden", tz: "Europe/Stockholm", city: "Stockholm" },
-  "norway.html": { name: "Norway", tz: "Europe/Oslo", city: "Oslo" },
+  "finland.html": { name: "Finland", tz: "Europe/Helsinki", city: "Helsinki", lat: 60.1695, lon: 24.9354 },
+  "sweden.html": { name: "Sweden", tz: "Europe/Stockholm", city: "Stockholm", lat: 59.3293, lon: 18.0686 },
+  "norway.html": { name: "Norway", tz: "Europe/Oslo", city: "Oslo", lat: 59.9139, lon: 10.7522 },
 };
 
 iframe.addEventListener("load", function () {
@@ -34,12 +36,18 @@ iframe.addEventListener("load", function () {
         });
 
         let weatherHTML = "...";
+
         try {
           const res = await fetch(
-            `https://openweathermap.org{data.city}&units=metric&appid=${API_KEY}`,
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${data.lat}&lon=${data.lon}&units=metric&appid=${API_KEY}`
           );
           const wData = await res.json();
-          if (res.ok) weatherHTML = `${Math.round(wData.main.temp)}°C`;
+
+          if (res.ok && wData.current) {
+            weatherHTML = `${Math.round(wData.current.temp)}°C`;
+          } else {
+            weatherHTML = "Offline";
+          }
         } catch (err) {
           weatherHTML = "Offline";
         }
