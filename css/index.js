@@ -1,7 +1,7 @@
 const iframe = document.querySelector('iframe[name="incontent"]');
 const footerText = document.querySelector(".end p");
 let clockInterval;
-const API_KEY = "f03eee1f0f50bbba36da7fc8b7f3313f";
+const API_KEY = "f60b30681c1e40ec8ed41b55e7a9311e";
 
 const countryConfig = {
   "iceland.html": {
